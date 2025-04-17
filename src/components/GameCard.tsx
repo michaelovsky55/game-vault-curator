@@ -4,7 +4,7 @@ import { Game } from "@/context/GameContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { PlusCircle, Star, ImageOff } from "lucide-react";
+import { PlusCircle, Star, ImageOff, Youtube } from "lucide-react";
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useGameContext } from "@/context/GameContext";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 interface GameCardProps {
   game: Game;
@@ -29,13 +30,13 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
   };
 
   return (
-    <Card className="overflow-hidden transition-all hover:shadow-lg w-full h-full flex flex-col">
+    <Card className="overflow-hidden transition-all hover:shadow-lg w-full h-full flex flex-col group">
       <div className="relative aspect-video overflow-hidden bg-muted">
         {!imageError ? (
           <img 
             src={game.image} 
             alt={game.title} 
-            className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+            className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300"
             onError={handleImageError}
           />
         ) : (
@@ -51,6 +52,33 @@ const GameCard: React.FC<GameCardProps> = ({ game }) => {
             {game.rating.toFixed(1)}
           </Badge>
         </div>
+        {game.youtubeId && (
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button 
+                size="icon" 
+                variant="destructive" 
+                className="absolute bottom-2 right-2 h-8 w-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <Youtube className="h-4 w-4" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-3xl">
+              <DialogHeader>
+                <DialogTitle>{game.title} - Walkthrough</DialogTitle>
+              </DialogHeader>
+              <div className="aspect-video w-full overflow-hidden rounded-md">
+                <iframe
+                  src={`https://www.youtube.com/embed/${game.youtubeId}?autoplay=0`}
+                  title={`${game.title} Walkthrough`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full border-0"
+                ></iframe>
+              </div>
+            </DialogContent>
+          </Dialog>
+        )}
       </div>
       <CardHeader className="p-4 pb-2">
         <CardTitle className="text-lg line-clamp-1">{game.title}</CardTitle>
