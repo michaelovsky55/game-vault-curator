@@ -1,10 +1,10 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Game } from "@/context/GameContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { PlusCircle, Star, Star as StarIcon } from "lucide-react";
+import { PlusCircle, Star, ImageOff } from "lucide-react";
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -21,15 +21,31 @@ interface GameCardProps {
 
 const GameCard: React.FC<GameCardProps> = ({ game }) => {
   const { lists, addToList } = useGameContext();
+  const [imageError, setImageError] = useState(false);
+
+  // Function to handle image loading errors
+  const handleImageError = () => {
+    setImageError(true);
+  };
 
   return (
     <Card className="overflow-hidden transition-all hover:shadow-lg w-full h-full flex flex-col">
-      <div className="relative aspect-video overflow-hidden">
-        <img 
-          src={game.image} 
-          alt={game.title} 
-          className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
-        />
+      <div className="relative aspect-video overflow-hidden bg-muted">
+        {!imageError ? (
+          <img 
+            src={game.image} 
+            alt={game.title} 
+            className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+            onError={handleImageError}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-muted/50">
+            <div className="text-center">
+              <ImageOff className="h-10 w-10 mx-auto text-muted-foreground" />
+              <p className="text-xs text-muted-foreground mt-2">{game.title}</p>
+            </div>
+          </div>
+        )}
         <div className="absolute top-2 right-2">
           <Badge variant="secondary" className="bg-black/70 text-white font-bold">
             {game.rating.toFixed(1)}
