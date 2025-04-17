@@ -10,6 +10,7 @@ export interface Game {
   releaseYear: number;
   description: string;
   rating: number;
+  youtubeId?: string; // Add youtubeId as optional property
 }
 
 export interface GameList {
@@ -35,10 +36,15 @@ interface GameContextType {
 const GameContext = createContext<GameContextType | undefined>(undefined);
 
 export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // Load lists from localStorage on initial render
   const [lists, setLists] = useState<GameList[]>(() => {
-    const savedLists = localStorage.getItem("gameLists");
-    if (savedLists) {
-      return JSON.parse(savedLists);
+    try {
+      const savedLists = localStorage.getItem("gameLists");
+      if (savedLists) {
+        return JSON.parse(savedLists);
+      }
+    } catch (error) {
+      console.error("Error loading lists from localStorage:", error);
     }
     // Default lists
     return [
@@ -54,7 +60,11 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Save lists to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem("gameLists", JSON.stringify(lists));
+    try {
+      localStorage.setItem("gameLists", JSON.stringify(lists));
+    } catch (error) {
+      console.error("Error saving lists to localStorage:", error);
+    }
   }, [lists]);
 
   const getGameById = (id: number) => {

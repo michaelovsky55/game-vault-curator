@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
       <div className="flex h-16 items-center px-4 container mx-auto">
         <div className="flex items-center gap-2 font-bold text-xl text-primary">
           <Gamepad2 className="h-6 w-6" />
-          <span>GameVault Curator</span>
+          <span>Micha Fedro Gaming Recommendation System</span>
         </div>
         
         <nav className="flex items-center ml-auto gap-4 md:gap-6">

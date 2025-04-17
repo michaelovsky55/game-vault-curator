@@ -477,5 +477,34 @@ export const games = [
     description: "Featuring mecha design by Hidetaka Miyazaki and FromSoftware, ARMORED CORE VI FIRES OF RUBICON brings back the series' signature gameplay.",
     rating: 8.9,
     youtubeId: "t6N4IzGFwyg"
-  }
-];
+  },
+  {
+    id: 51,
+    title: "The Last of Us Part I",
+    image: "https://cdn.cloudflare.steamstatic.com/steam/apps/1888930/header.jpg",
+    genre: ["Action", "Adventure", "Survival"],
+    releaseYear: 2022,
+    description: "In a hostile, post-pandemic world, Joel and Ellie, brought together by desperate circumstances, must rely on each other to survive a brutal journey across what remains of the United States.",
+    rating: 9.7,
+    youtubeId: "WxjeV10H1F0"
+  },
+  {
+    id: 52,
+    title: "The Last of Us Part II",
+    image: "https://image.api.playstation.com/vulcan/ap/rnd/202206/0720/eEczyEMDd2BLa3dtkGJVE9Id.png",
+    genre: ["Action", "Adventure", "Survival"],
+    releaseYear: 2020,
+    description: "Five years after their dangerous journey across the post-pandemic United States, Ellie and Joel have settled down in Jackson, Wyoming. Living amongst a thriving community of survivors has allowed them peace and stability, despite the constant threat of the infected and other, more desperate survivors.",
+    rating: 9.5,
+    youtubeId: "II5UsqP2JAk"
+  },
+  {
+    id: 53,
+    title: "Uncharted 4: A Thief's End",
+    image: "https://cdn.cloudflare.steamstatic.com/steam/apps/1659420/header.jpg",
+    genre: ["Action", "Adventure"],
+    releaseYear: 2016,
+    description: "Several years after his last adventure, retired fortune hunter Nathan Drake is forced back into the world of thieves. With the stakes much more personal, Drake embarks on a globe-trotting journey in pursuit of a historical conspiracy behind a fabled pirate treasure.",
+    rating: 9.5,
+    youtubeId: "hh5HV4iic1Y"
+  },
